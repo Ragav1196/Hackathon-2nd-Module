@@ -16,7 +16,7 @@ export function Register() {
     event.preventDefault();
     // to prevent the form from refreshing or redirecting to the specified url
 
-    const response = await fetch("http://localhost:9000/register", {
+    const response = await fetch("https://hackathonmodule-2.herokuapp.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
