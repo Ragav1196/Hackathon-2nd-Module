@@ -280,7 +280,6 @@
   gap: 50px;
   justify-content: center;
   width: 600px;
-  height: 220px;
   padding: 50px;
   border-radius: 30px;
 }
@@ -292,13 +291,10 @@
   object-position: 51% 42%;
 }
 
-.register > article > form > .input:nth-child(1) {
-  margin-bottom: 15px;
-}
-
 .register > article > form > .input {
   width: 100%;
   margin-bottom: 10px;
+  /* height: 0px; */
 }
 
 .register > article > form {

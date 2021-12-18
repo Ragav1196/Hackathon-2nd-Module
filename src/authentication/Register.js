@@ -2,79 +2,147 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 export function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [register, setRegister] = useState(false)
+  const [username, setUsername] = useState(false);
+  const [userEmail, setUserEmail] = useState(false);
+  const [bothCred, setBothCred] = useState(false);
 
   const history = useHistory();
 
-  async function RegisterUser(event) {
-    event.preventDefault();
-    // to prevent the form from refreshing or redirecting to the specified url
-
-    const response = await fetch("https://hackathonmodule-2.herokuapp.com/register", {
+  async function RegisterUser(userInfo) {
+    const response = await fetch("http://localhost:9000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
+      body: JSON.stringify(userInfo),
     });
     const data = await response.json();
-    console.log(data);
 
     if (data.acknowledged) {
       history.push("/login");
     }
 
-    if(data.message === "Username already exists"){
-      setRegister(true)
+    if (data.message === "Username and Email already exists") {
+      setBothCred(true);
+    }
+
+    if (data.message === "Username already exists") {
+      setUsername(true);
+    }
+
+    if (data.message === "User Email already exists") {
+      setUserEmail(true);
     }
   }
+
+  // VALIDATIONS
+
+  const formValidationSchema = yup.object({
+    name: yup.string().required("Please give your username"),
+    password: yup
+      .string()
+      .required("Please provide password")
+      .min(8, "Password must be longer")
+      .matches(
+        /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@!#%&]).{8,}$/g,
+        "Password pattern doesn't match"
+      ),
+    email: yup
+      .string()
+      .required("Please provide your E-mail")
+      .matches(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        "Email pattern doesn't match"
+      ),
+  });
+
+  const { handleSubmit, values, handleChange, handleBlur, touched, errors } =
+    useFormik({
+      initialValues: {
+        name: "",
+        password: "",
+        email: "",
+      },
+      validationSchema: formValidationSchema,
+
+      onSubmit: (userInfo) => {
+        RegisterUser(userInfo);
+      },
+    });
+
+  function SetToFalse() {
+    setUsername(false);
+    setUserEmail(false);
+    setBothCred(false);
+  }
   return (
-    <section className="register">
+    <section onClick={() => SetToFalse()} className="register">
       <article>
         <img
           src="https://image.shutterstock.com/z/stock-vector-concept-sign-in-page-on-mobile-screen-desktop-computer-with-login-form-and-sign-in-button-for-web-1145292776.jpg"
           alt="Register page"
         />
-        <form onSubmit={RegisterUser}>
-        {register ? <p className="signInError">Username already exists</p> : ""}
+        <form onSubmit={handleSubmit}>
+          {username ? (
+            <p className="signInError">Username already exists</p>
+          ) : (
+            ""
+          )}
+
+          {userEmail ? (
+            <p className="signInError">User Email already exists</p>
+          ) : (
+            ""
+          )}
+
+          {bothCred ? (
+            <p className="signInError">Username and Email already exists</p>
+          ) : (
+            ""
+          )}
           <TextField
             className="input"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            name="name"
             type={"text"}
-            value={name}
-            onChange={(data) => setName(data.target.value)}
+            value={values.name}
             label="Name"
             variant="outlined"
             placeholder="Enter your name"
-          />{" "}
-          <br />
-          <TextField
-            className="input"
-            type={"password"}
-            value={password}
-            onChange={(data) => setPassword(data.target.value)}
-            label="Password"
-            variant="outlined"
-            placeholder="Enter your password"
+            helperText={errors.name && touched.name && errors.name}
+            error={errors.name && touched.name}
           />
           <TextField
             className="input"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            name="password"
+            type={"password"}
+            value={values.password}
+            label="Password"
+            variant="outlined"
+            placeholder="Enter your password"
+            helperText={errors.password && touched.password && errors.password}
+            error={errors.password && touched.password}
+          />
+          <TextField
+            className="input"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            name="email"
             type={"email"}
-            value={email}
-            onChange={(data) => setEmail(data.target.value)}
+            value={values.email}
             label="E-mail"
             variant="outlined"
             placeholder="Enter your E-mail"
-          />          
+            helperText={errors.email && touched.email && errors.email}
+            error={errors.email && touched.email}
+          />
           <Button type="submit" variant="contained">
             SUBMIT
           </Button>
@@ -83,3 +151,5 @@ export function Register() {
     </section>
   );
 }
+
+// https://hackathonmodule-2.herokuapp.com/register

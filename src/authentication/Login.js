@@ -2,31 +2,27 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 export function Login() {
   const history = useHistory();
 
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-
   const [login, setLogin] = useState(false);
 
-  async function RegisterUser(event) {
-    event.preventDefault();
-    // to prevent the form from refreshing or redirecting to the specified url
-
-    const response = await fetch("https://hackathonmodule-2.herokuapp.com/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        password,
-      }),
-    });
+  async function RegisterUser(userInfo) {
+    console.log(userInfo);
+    const response = await fetch(
+      "http://localhost:9000/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+      }
+    );
     const data = await response.json();
-    console.log(data.message, data.token);
 
     localStorage.setItem("Token", data.token);
 
@@ -40,33 +36,60 @@ export function Login() {
     }
   }
 
+  // VALIDATIONS
+
+  const formValidationSchema = yup.object({
+    name: yup.string().required("Please give your username"),
+    password: yup.string().required("Please provide password"),
+  });
+
+  const { handleSubmit, values, handleChange, handleBlur, touched, errors } =
+    useFormik({
+      initialValues: {
+        name: "",
+        password: "",
+      },
+      validationSchema: formValidationSchema,
+
+      onSubmit: (userInfo) => {
+        RegisterUser(userInfo);
+      },
+    });
   return (
-    <section className="register">
+    <section onClick={() => setLogin(false)} className="register">
       <article>
         <img
           src="https://image.shutterstock.com/z/stock-vector-concept-sign-in-page-on-mobile-screen-desktop-computer-with-login-form-and-sign-in-button-for-web-1145292776.jpg"
           alt="Register page"
         />
-        <form onSubmit={RegisterUser}>
+        <form onSubmit={handleSubmit}>
           {login ? <p className="signInError">INVALID CREDENTIALS</p> : ""}
           <TextField
             className="input"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            name="name"
             type={"text"}
-            value={name}
-            onChange={(data) => setName(data.target.value)}
+            value={values.name}
             label="Name"
             variant="outlined"
             placeholder="Enter your name"
-          />{" "}
+            helperText={errors.name && touched.name && errors.name}
+            error={errors.name && touched.name}
+          />
           <br />
           <TextField
             className="input"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            name="password"
             type={"password"}
-            value={password}
-            onChange={(data) => setPassword(data.target.value)}
+            value={values.password}
             label="Password"
             variant="outlined"
             placeholder="Enter your password"
+            helperText={errors.password && touched.password && errors.password}
+            error={errors.password && touched.password}
           />
           <p className="forgotPwd">Forgot password?</p>
           <Button type="submit" variant="contained">
@@ -88,3 +111,5 @@ export function Login() {
     </section>
   );
 }
+
+// https://hackathonmodule-2.herokuapp.com/login
