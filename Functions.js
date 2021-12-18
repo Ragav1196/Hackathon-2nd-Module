@@ -1,8 +1,18 @@
 import bcrypt from "bcrypt";
 import { client } from "./index.js";
 
-function GetUsers(name) {
-  return client.db("hackathonModule-2").collection("login").findOne({ name: name });
+function GetUsername(name) {
+  return client
+    .db("hackathonModule-2")
+    .collection("login")
+    .findOne({ name: name})
+}
+
+function GetEmail(email) {
+  return client
+    .db("hackathonModule-2")
+    .collection("login")
+    .findOne({ email: email})
 }
 
 async function GenerateHash(password) {
@@ -19,4 +29,4 @@ function AddUsers(name, password, hashedPassword, email) {
     .insertMany([{ name, password: hashedPassword, email }]);
 }
 
-export { GetUsers, GenerateHash, AddUsers };
+export { GetUsername, GetEmail, GenerateHash, AddUsers };
