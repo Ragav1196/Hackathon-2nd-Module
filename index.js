@@ -21,6 +21,11 @@ export const client = await CreateConnection();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (request, response) => {
+  response.send("HELLO");
+});
+
+
 app.use("/", userRouter);
 
 app.listen(PORT, () => {
