@@ -1,7 +1,18 @@
 import express from "express";
-import { GetUsername, GetEmail, GenerateHash, AddUsers } from "./Functions.js";
+import {
+  GetUsername,
+  GetEmail,
+  GenerateHash,
+  AddUsers,
+  GetAllLeads,
+  AddLeads,
+  GetLeadsById,
+  UpdateLeadsById,
+  DeleteLeadsById,
+} from "./Functions.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { client } from "./index.js";
 
 const router = express.Router();
 
@@ -38,7 +49,9 @@ router.route("/register").post(async (req, res) => {
   }
 
   if (
-    !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(dataProvided.email)
+    !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      dataProvided.email
+    )
   ) {
     res.status(400).send({ message: "Email pattern doesn't match" });
     return;
@@ -48,9 +61,9 @@ router.route("/register").post(async (req, res) => {
 
   const result = await AddUsers(
     dataProvided.name,
-    dataProvided.password,
     hashedPassword,
-    dataProvided.email
+    dataProvided.email,
+    dataProvided.userType
   );
   res.send(result);
 });
@@ -79,10 +92,58 @@ router.route("/login").post(async (req, res) => {
       message: "Successfull login",
       token: token,
       name: DataFrmDB.name,
+      userType: DataFrmDB.userType,
     });
   } else {
     res.status(401).send({ message: "Invalid credentials" });
   }
 });
+
+router
+  .route("/lead")
+  .get(async (req, res) => {
+    const leadData = await GetAllLeads();
+    res.send(leadData);
+  })
+  .get(async (req, res) => {
+    const totalLeads = await client
+      .db("hackathonModule-2")
+      .collection("login")
+      .find({})
+      .count();
+    console.log(totalLeads);
+    res.send(totalLeads);
+  })
+  .post(async (req, res) => {
+    const data = req.body;
+
+    const addLead = await AddLeads(data);
+
+    res.send(addLead);
+  });
+
+router
+  .route("/lead/:id")
+  .get(async (req, res) => {
+    const { id } = req.params;
+
+    const leadData = await GetLeadsById(id);
+    res.send(leadData);
+  })
+  .put(async (req, res) => {
+    const { id } = req.params;
+
+    const data = req.body;
+
+    const updateLead = await UpdateLeadsById(id, data);
+
+    res.send(updateLead);
+  })
+  .delete(async (req, res) => {
+    const { id } = req.params;
+
+    const deleteLeadData = await DeleteLeadsById(id);
+    res.send(deleteLeadData);
+  });
 
 export const userRouter = router;
