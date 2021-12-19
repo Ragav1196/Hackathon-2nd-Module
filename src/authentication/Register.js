@@ -10,6 +10,8 @@ export function Register() {
   const [userEmail, setUserEmail] = useState(false);
   const [bothCred, setBothCred] = useState(false);
 
+  const userType = localStorage.getItem("userType");
+
   const history = useHistory();
 
   async function RegisterUser(userInfo) {
@@ -66,6 +68,7 @@ export function Register() {
         name: "",
         password: "",
         email: "",
+        userType: "",
       },
       validationSchema: formValidationSchema,
 
@@ -143,6 +146,66 @@ export function Register() {
             helperText={errors.email && touched.email && errors.email}
             error={errors.email && touched.email}
           />
+          <div className="RegRadioBtn">
+            {userType === "admin" ? (
+              <label>
+                <input
+                  type="radio"
+                  name="userType"
+                  id="admin"
+                  required
+                  value="admin"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                Admin
+              </label>
+            ) : (
+              ""
+            )}
+            {userType === "admin" ? (
+              <label>
+                <input
+                  type="radio"
+                  name="userType"
+                  value="manager"
+                  required
+                  id="manager"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                Manager
+              </label>
+            ) : (
+              ""
+            )}
+
+            <label>
+              <input
+                type="radio"
+                name="userType"
+                id="senior-employee"
+                required
+                value="senior-employee"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              Senior Employee
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="userType"
+                id="junior-employee"
+                required
+                value="junior-employee"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              Junior Employee
+            </label>
+          </div>
           <Button type="submit" variant="contained">
             SUBMIT
           </Button>

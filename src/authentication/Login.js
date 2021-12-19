@@ -11,23 +11,19 @@ export function Login() {
   const [login, setLogin] = useState(false);
 
   async function RegisterUser(userInfo) {
-    console.log(userInfo);
-    const response = await fetch(
-      "https://hackathonmodule-2.herokuapp.com/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo),
-      }
-    );
+    const response = await fetch("https://hackathonmodule-2.herokuapp.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    });
     const data = await response.json();
-
-    localStorage.setItem("Token", data.token);
 
     if (data.message === "Successfull login") {
       localStorage.setItem("Username", data.name);
+      localStorage.setItem("Token", data.token);
+      localStorage.setItem("userType", data.userType);
       history.push("/home");
     }
 
@@ -95,17 +91,6 @@ export function Login() {
           <Button type="submit" variant="contained">
             SIGN IN
           </Button>
-          <p>
-            Dont have an account?{" "}
-            <span
-              className="signUpButon"
-              onClick={() => {
-                history.push("/register");
-              }}
-            >
-              SignUp
-            </span>
-          </p>
         </form>
       </article>
     </section>

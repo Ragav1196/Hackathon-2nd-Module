@@ -2,10 +2,6 @@
   background-color: #e8e4e4;
 }
 
-/* .wholeContent > article {
-  display: flex;
-} */
-
 /* TOPBAR */
 .topbar {
   display: flex;
@@ -19,6 +15,35 @@
 .topbar article {
   display: flex;
   width: 270px;
+}
+
+.topbar > article > p > svg {
+  width: 45px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.TbSearch {
+  display: flex;
+  align-items: center;
+}
+
+.TbSearch input {
+  width: 200px;
+  height: 26px;
+  position: absolute;
+}
+
+.TbSearch span {
+  position: relative;
+  left: 177px;
+  color: black;
+  top: 1px;
+}
+
+.TbSearch > span > svg {
+  width: 30px;
+  height: 30px;
 }
 
 /* LOGIN BUTTON*/
@@ -134,8 +159,12 @@
 
 .mainContent article:nth-child(1) {
   display: flex;
-  justify-content: space-between;
-  margin: 20px 10px;
+  justify-content: space-around;
+}
+
+.mainContent article:nth-child(1) > p {
+  font-weight: 500;
+  font-size: 25px;
 }
 
 .mainContent article:nth-child(2) div:nth-child(1) {
@@ -174,6 +203,11 @@
 }
 
 /* LEAD DATA */
+
+.leadsContainer {
+  margin-left: 64px;
+}
+
 .leadsData {
   overflow-x: scroll;
   overflow-y: scroll;
@@ -181,7 +215,7 @@
 }
 
 .leads {
-  margin: 20px 20px 20px 63px;
+  margin: 20px 20px 20px;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -190,6 +224,7 @@
 .leads img {
   width: 100px;
   height: 100px;
+  margin-bottom: auto;
 }
 
 .leads article p {
@@ -211,6 +246,48 @@
 .leadsDetail2 {
   display: flex;
   white-space: nowrap;
+}
+
+.leadsCrud > button{
+  margin-right: 10px;
+}
+
+.leadsCrud > button{
+  margin-bottom: 10px;
+}
+
+.leadsSaveBtn{
+  width: 200px;
+  left: 150px;
+}
+
+/* ADD USER */
+.AuContainer {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.AuContainer > button {
+  width: 125px;
+}
+
+.AuForm {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.AuForm > div {
+  background-color: bisque;
+}
+
+.auHide{
+  cursor: pointer;
 }
 
 /* CONTACTS */
@@ -317,21 +394,27 @@
   text-align: center;
 }
 
-.signUpButon{
+.signUpButon {
   cursor: pointer;
 }
 
-.signUpButon:hover, .forgotPwd:hover{
+.signUpButon:hover,
+.forgotPwd:hover {
   color: rgb(41, 86, 184);
   text-decoration: underline;
 }
 
-.signInError{
+.signInError {
   color: brown;
   font-weight: 600;
   font-size: 20px;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.RegRadioBtn {
+  display: flex;
+  justify-content: space-around;
 }
 
 @media (max-width: 768px) {

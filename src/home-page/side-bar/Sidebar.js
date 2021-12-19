@@ -11,9 +11,12 @@ import ArticleIcon from "@mui/icons-material/Article";
 import EmailIcon from "@mui/icons-material/Email";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import FormatLineSpacingIcon from "@mui/icons-material/FormatLineSpacing";
-import { useHistory } from "react-router-dom";
+import { SidebarContent } from "./SidebarContent";
 
-export function Sidebar({ setTitle }) {
+export function SidebarData({ setTitle }) {
+
+  const userType = localStorage.getItem("userType");
+
   const content = [
     {
       icon: <HomeIcon />,
@@ -80,6 +83,11 @@ export function Sidebar({ setTitle }) {
       icon: <FormatLineSpacingIcon />,
       fieldName: "Forms",
     },
+    {
+      icon: userType === "admin" || userType === "manager" ? <FormatLineSpacingIcon /> : "",
+      fieldName: "Add Users",
+      onclick: "/register",
+    },
   ];
   return (
     <section className="sidebarContainer">
@@ -89,23 +97,5 @@ export function Sidebar({ setTitle }) {
     </section>
   );
 }
-function SidebarContent({ Data, setTitle }) {
-  const history = useHistory();
-  return (
-    <section
-      onClick={() => {
-        setTitle(Data.fieldName);
-        if (Data.onclick) {
-          history.push(Data.onclick);
-        }
-      }}
-      className="sidebarContent"
-    >
-      <p>{Data.icon}</p>
-      <article>
-        <p>{Data.fieldName}</p>
-        {Data.addSymbols ? <p>{Data.addSymbols}</p> : ""}
-      </article>
-    </section>
-  );
-}
+
+

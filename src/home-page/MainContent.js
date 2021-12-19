@@ -1,16 +1,28 @@
+import { useState } from "react";
+
 export function MainContent() {
+  const userName = localStorage.getItem("Username");
+
+  const [TotalLeads, setTotalLeads] = useState(0)
+
+  const leadData = () => {
+    fetch("https://hackathonmodule-2.herokuapp.com/lead", {
+      method: "GET",
+    })
+      .then((data) => data.json())
+      .then((data) => setTotalLeads(data.length))
+  };
+  leadData()
 
   return (
     <section className="mainContent">
       <article>
-        <p>Welcome Username</p>
-        <button>Change User</button>
+        <p>Welcome {userName}</p>
       </article>
       <article>
         <div>
-          <p>Deals Created This Month</p>
-          <p>10 ⬆️ 100%</p>
-          <p>Last Month: 0</p>
+          <p>Total leads currently</p>
+          <p>{TotalLeads}</p>
         </div>
         <div>
           <p>Revenue This Month</p>
