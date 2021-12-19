@@ -33,7 +33,7 @@ export function EditLead({ lead, id }) {
       .string()
       .required("Client Email is required")
       .matches(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        /^(([^<>()[\];:\s@"]+([^<>()[\];:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}[0-9]{1,3}[0-9]{1,3}[0-9]{1,3}\])|(([a-zA-Z\-0-9]+)+[a-zA-Z]{2,}))$/,
         "Email pattern doesn't match"
       ),
     title: yup.string().required("Client title is required"),
@@ -42,7 +42,7 @@ export function EditLead({ lead, id }) {
       .string()
       .required("URL for client is required or go with default picture")
       .matches(
-        /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/,
+        /[(http(s)?):(www)?a-zA-Z0-9@:%._~#=]{2,256}[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)$/,
         "URL pattern doesn't match"
       ),
   });
