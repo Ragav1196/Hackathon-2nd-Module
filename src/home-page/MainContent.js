@@ -3,16 +3,16 @@ import { useState } from "react";
 export function MainContent() {
   const userName = localStorage.getItem("Username");
 
-  const [TotalLeads, setTotalLeads] = useState(0)
+  const [TotalLeads, setTotalLeads] = useState(0);
 
   const leadData = () => {
-    fetch("https://hackathonmodule-2.herokuapp.com/lead", {
+    fetch("http://hackathonmodule-2.herokuapp.com/lead", {
       method: "GET",
     })
       .then((data) => data.json())
-      .then((data) => setTotalLeads(data.length))
+      .then((data) => setTotalLeads(data.length));
   };
-  leadData()
+  leadData();
 
   return (
     <section className="mainContent">

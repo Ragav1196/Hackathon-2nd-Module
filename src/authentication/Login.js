@@ -11,13 +11,16 @@ export function Login() {
   const [login, setLogin] = useState(false);
 
   async function RegisterUser(userInfo) {
-    const response = await fetch("https://hackathonmodule-2.herokuapp.com/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userInfo),
-    });
+    const response = await fetch(
+      "http://hackathonmodule-2.herokuapp.com/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+      }
+    );
     const data = await response.json();
 
     if (data.message === "Successfull login") {
@@ -97,5 +100,5 @@ export function Login() {
   );
 }
 
-// https://hackathonmodule-2.herokuapp.com/login
-// http://localhost:9000/login
+// http://hackathonmodule-2.herokuapp.com/login/login
+// http://hackathonmodule-2.herokuapp.com/login

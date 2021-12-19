@@ -12,7 +12,7 @@ export function EditLeadFn() {
   const [lead, setLead] = useState(null);
 
   useEffect(() => {
-    fetch(`https://hackathonmodule-2.herokuapp.com/lead/${id}`, {
+    fetch(`http://hackathonmodule-2.herokuapp.com/lead/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())
@@ -48,7 +48,7 @@ export function EditLead({ lead, id }) {
   });
 
   let dataFrmDB = (updatedLead) => {
-    fetch(`https://hackathonmodule-2.herokuapp.com/lead/${id}`, {
+    fetch(`http://hackathonmodule-2.herokuapp.com/lead/${id}`, {
       method: "PUT",
       body: JSON.stringify(updatedLead),
       headers: { "Content-Type": "application/json" },
