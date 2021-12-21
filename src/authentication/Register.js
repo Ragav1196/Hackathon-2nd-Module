@@ -89,7 +89,7 @@ export function Register() {
     <section onClick={() => SetToFalse()} className="register">
       <article>
         <img
-          src="httpss://image.shutterstock.com/z/stock-vector-concept-sign-in-page-on-mobile-screen-desktop-computer-with-login-form-and-sign-in-button-for-web-1145292776.jpg"
+          src="https://image.shutterstock.com/z/stock-vector-concept-sign-in-page-on-mobile-screen-desktop-computer-with-login-form-and-sign-in-button-for-web-1145292776.jpg"
           alt="Register page"
         />
         <form onSubmit={handleSubmit}>
