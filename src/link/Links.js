@@ -51,7 +51,9 @@ export function Links() {
             <Register />
           </AdminRoute>
           <Route path={`/lead/:id`}>
-          <EditLeadFn />
+            <Topbar />
+            <SidebarData />
+            <EditLeadFn />
           </Route>
           <Route path="/adminonly">ADMIN ONLY</Route>
           <LoginRoute path="/">

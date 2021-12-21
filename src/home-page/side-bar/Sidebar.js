@@ -4,8 +4,6 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import BusinessIcon from "@mui/icons-material/Business";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import CallIcon from "@mui/icons-material/Call";
 import ArticleIcon from "@mui/icons-material/Article";
 import EmailIcon from "@mui/icons-material/Email";
@@ -14,7 +12,6 @@ import FormatLineSpacingIcon from "@mui/icons-material/FormatLineSpacing";
 import { SidebarContent } from "./SidebarContent";
 
 export function SidebarData({ setTitle }) {
-
   const userType = localStorage.getItem("userType");
 
   const content = [
@@ -52,16 +49,6 @@ export function SidebarData({ setTitle }) {
       addSymbols: "+",
     },
     {
-      icon: <FormatListBulletedIcon />,
-      fieldName: "Tasks",
-      addSymbols: "+",
-    },
-    {
-      icon: <BusinessCenterIcon />,
-      fieldName: "Cases",
-      addSymbols: "+",
-    },
-    {
       icon: <CallIcon />,
       fieldName: "Calls",
       addSymbols: "+",
@@ -84,7 +71,12 @@ export function SidebarData({ setTitle }) {
       fieldName: "Forms",
     },
     {
-      icon: userType === "admin" || userType === "manager" ? <FormatLineSpacingIcon /> : "",
+      icon:
+        userType === "admin" || userType === "manager" ? (
+          <FormatLineSpacingIcon />
+        ) : (
+          ""
+        ),
       fieldName: "Add Users",
       onclick: "/register",
     },
@@ -97,5 +89,3 @@ export function SidebarData({ setTitle }) {
     </section>
   );
 }
-
-

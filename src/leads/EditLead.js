@@ -12,7 +12,7 @@ export function EditLeadFn() {
   const [lead, setLead] = useState(null);
 
   useEffect(() => {
-    fetch(`https://hackathonmodule-2.herokuapp.com/lead/${id}`, {
+    fetch(`http://localhost:9000/lead/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())
@@ -42,7 +42,7 @@ export function EditLead({ lead, id }) {
   });
 
   let dataFrmDB = (updatedLead) => {
-    fetch(`https://hackathonmodule-2.herokuapp.com/lead/${id}`, {
+    fetch(`http://localhost:9000/lead/${id}`, {
       method: "PUT",
       body: JSON.stringify(updatedLead),
       headers: { "Content-Type": "application/json" },
@@ -68,8 +68,9 @@ export function EditLead({ lead, id }) {
       },
     });
   return (
-    <section>
-      <form onSubmit={handleSubmit} className="AuForm">
+    <section className="ElContainer">
+      <p>EDIT YOUR LEAD</p>
+      <form onSubmit={handleSubmit} className="ElForm">
         <TextField
           value={values.name}
           onChange={handleChange}

@@ -12,7 +12,7 @@ export function Login() {
 
   async function RegisterUser(userInfo) {
     const response = await fetch(
-      "https://hackathonmodule-2.herokuapp.com/login",
+      "http://localhost:9000/login",
       {
         method: "POST",
         headers: {
@@ -100,5 +100,5 @@ export function Login() {
   );
 }
 
-// https://hackathonmodule-2.herokuapp.com/login/login
 // https://hackathonmodule-2.herokuapp.com/login
+// http://localhost:9000/login
