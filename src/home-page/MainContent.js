@@ -6,7 +6,7 @@ export function MainContent() {
   const [TotalLeads, setTotalLeads] = useState(0);
 
   const leadData = () => {
-    fetch("http://localhost:9000/lead", {
+    fetch("https://hackathonmodule-2.herokuapp.com/lead", {
       method: "GET",
     })
       .then((data) => data.json())
