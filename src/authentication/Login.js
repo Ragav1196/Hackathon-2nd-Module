@@ -45,8 +45,8 @@ export function Login() {
   const { handleSubmit, values, handleChange, handleBlur, touched, errors } =
     useFormik({
       initialValues: {
-        name: "",
-        password: "",
+        name: "Ragavendiran",
+        password: "Ragav1@ragav",
       },
       validationSchema: formValidationSchema,
 

@@ -49,13 +49,7 @@ function AddUser({ leadData }) {
     name: yup.string().required("Client name is required"),
     Phone: yup.number().required("Client number is required"),
     company: yup.string().required("Client company name is required"),
-    email: yup
-      .string()
-      .required("Client Email is required")
-      .matches(
-        /^(([^<>()[\];:\s@"]+([^<>()[\];:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}[0-9]{1,3}[0-9]{1,3}[0-9]{1,3}\])|(([a-zA-Z\-0-9]+)+[a-zA-Z]{2,}))$/,
-        "Email pattern doesn't match"
-      ),
+    email: yup.string().required("Client Email is required"),
     title: yup.string().required("Client title is required"),
     leadSource: yup.string().required("Client lead source is required"),
     picture: yup
