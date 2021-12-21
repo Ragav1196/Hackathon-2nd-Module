@@ -12,7 +12,6 @@ import {
 } from "./Functions.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { client } from "./index.js";
 
 const router = express.Router();
 
@@ -104,15 +103,6 @@ router
   .get(async (req, res) => {
     const leadData = await GetAllLeads();
     res.send(leadData);
-  })
-  .get(async (req, res) => {
-    const totalLeads = await client
-      .db("hackathonModule-2")
-      .collection("login")
-      .find({})
-      .count();
-    console.log(totalLeads);
-    res.send(totalLeads);
   })
   .post(async (req, res) => {
     const data = req.body;
