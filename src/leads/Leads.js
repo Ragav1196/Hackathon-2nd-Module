@@ -13,7 +13,7 @@ export function Leads({ data, leadData }) {
   const userType = localStorage.getItem("userType");
 
   const deleteLeads = (_id) => {
-    fetch(`http://hackathonmodule-2.herokuapp.com/lead/${_id}`, {
+    fetch(`https://hackathonmodule-2.herokuapp.com/lead/${_id}`, {
       method: "DELETE",
       body: JSON.stringify(),
     }).then(() => leadData());

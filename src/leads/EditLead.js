@@ -12,7 +12,7 @@ export function EditLeadFn() {
   const [lead, setLead] = useState(null);
 
   useEffect(() => {
-    fetch(`http://hackathonmodule-2.herokuapp.com/lead/${id}`, {
+    fetch(`https://hackathonmodule-2.herokuapp.com/lead/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())
@@ -36,13 +36,13 @@ export function EditLead({ lead, id }) {
       .string()
       .required("URL for client is required or go with default picture")
       .matches(
-        /[(http(s)?):(www)?a-zA-Z0-9@:%._~#=]{2,256}[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)$/,
+        /[(https(s)?):(www)?a-zA-Z0-9@:%._~#=]{2,256}[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)$/,
         "URL pattern doesn't match"
       ),
   });
 
   let dataFrmDB = (updatedLead) => {
-    fetch(`http://hackathonmodule-2.herokuapp.com/lead/${id}`, {
+    fetch(`https://hackathonmodule-2.herokuapp.com/lead/${id}`, {
       method: "PUT",
       body: JSON.stringify(updatedLead),
       headers: { "Content-Type": "application/json" },

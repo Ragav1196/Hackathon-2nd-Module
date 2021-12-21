@@ -12,7 +12,7 @@ export function LeadsData() {
   const [leadsData, setLeadsData] = useState([]);
 
   const leadData = () => {
-    fetch("http://hackathonmodule-2.herokuapp.com/lead", {
+    fetch("https://hackathonmodule-2.herokuapp.com/lead", {
       method: "GET",
     })
       .then((data) => data.json())
@@ -38,7 +38,7 @@ function AddUser({ leadData }) {
   const [show, setShow] = useState(false);
 
   let AddLeadFn = (newLead) => {
-    fetch("http://hackathonmodule-2.herokuapp.com/lead", {
+    fetch("https://hackathonmodule-2.herokuapp.com/lead", {
       method: "POST",
       body: JSON.stringify([newLead]),
       headers: { "Content-Type": "application/json" },
@@ -56,7 +56,7 @@ function AddUser({ leadData }) {
       .string()
       .required("URL for client is required or go with default picture")
       .matches(
-        /[(http(s)?):(www)?a-zA-Z0-9@:%._~#=]{2,256}[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)$/,
+        /[(https(s)?):(www)?a-zA-Z0-9@:%._~#=]{2,256}[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)$/,
         "URL pattern doesn't match"
       ),
   });

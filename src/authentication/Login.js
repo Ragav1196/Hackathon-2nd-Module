@@ -12,7 +12,7 @@ export function Login() {
 
   async function RegisterUser(userInfo) {
     const response = await fetch(
-      "http://hackathonmodule-2.herokuapp.com/login",
+      "https://hackathonmodule-2.herokuapp.com/login",
       {
         method: "POST",
         headers: {
@@ -58,7 +58,7 @@ export function Login() {
     <section onClick={() => setLogin(false)} className="register">
       <article>
         <img
-          src="https://image.shutterstock.com/z/stock-vector-concept-sign-in-page-on-mobile-screen-desktop-computer-with-login-form-and-sign-in-button-for-web-1145292776.jpg"
+          src="httpss://image.shutterstock.com/z/stock-vector-concept-sign-in-page-on-mobile-screen-desktop-computer-with-login-form-and-sign-in-button-for-web-1145292776.jpg"
           alt="Register page"
         />
         <form onSubmit={handleSubmit}>
@@ -100,5 +100,5 @@ export function Login() {
   );
 }
 
-// http://hackathonmodule-2.herokuapp.com/login/login
-// http://hackathonmodule-2.herokuapp.com/login
+// https://hackathonmodule-2.herokuapp.com/login/login
+// https://hackathonmodule-2.herokuapp.com/login
