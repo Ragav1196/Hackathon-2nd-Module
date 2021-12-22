@@ -12,7 +12,7 @@ export function Login() {
 
   async function RegisterUser(userInfo) {
     const response = await fetch(
-      "https://hackathonmodule-2.herokuapp.com/login",
+      "http://localhost:9000/login",
       {
         method: "POST",
         headers: {
@@ -55,11 +55,11 @@ export function Login() {
       },
     });
   return (
-    <section onClick={() => setLogin(false)} className="register">
+    <section onClick={() => setLogin(false)} className="login">
       <article>
         <img
           src="https://image.shutterstock.com/z/stock-vector-concept-sign-in-page-on-mobile-screen-desktop-computer-with-login-form-and-sign-in-button-for-web-1145292776.jpg"
-          alt="Register page"
+          alt="Login page"
         />
         <form onSubmit={handleSubmit}>
           {login ? <p className="signInError">INVALID CREDENTIALS</p> : ""}

@@ -15,7 +15,7 @@ export function Register() {
   const history = useHistory();
 
   async function RegisterUser(userInfo) {
-    const response = await fetch("https://hackathonmodule-2.herokuapp.com/register", {
+    const response = await fetch("http://localhost:9000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -147,64 +147,65 @@ export function Register() {
             error={errors.email && touched.email}
           />
           <div className="RegRadioBtn">
+            <p>Select user role:</p>
+
             {userType === "admin" ? (
-              <label>
-                <input
-                  type="radio"
-                  name="userType"
-                  id="admin"
-                  required
-                  value="admin"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                Admin
-              </label>
-            ) : (
-              ""
-            )}
-            {userType === "admin" ? (
-              <label>
-                <input
-                  type="radio"
-                  name="userType"
-                  value="manager"
-                  required
-                  id="manager"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                Manager
-              </label>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    name="userType"
+                    id="admin"
+                    required
+                    value="admin"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  Admin
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="userType"
+                    value="manager"
+                    required
+                    id="manager"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  Manager
+                </label>
+              </div>
             ) : (
               ""
             )}
 
-            <label>
-              <input
-                type="radio"
-                name="userType"
-                id="senior-employee"
-                required
-                value="senior-employee"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              Senior Employee
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="userType"
-                id="junior-employee"
-                required
-                value="junior-employee"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              Junior Employee
-            </label>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="userType"
+                  id="senior-employee"
+                  required
+                  value="senior-employee"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                Senior Employee
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="userType"
+                  id="junior-employee"
+                  required
+                  value="junior-employee"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                Junior Employee
+              </label>
+            </div>
           </div>
           <Button type="submit" variant="contained">
             SUBMIT

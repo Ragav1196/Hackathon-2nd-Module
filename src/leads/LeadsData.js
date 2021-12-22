@@ -13,7 +13,7 @@ export function LeadsData() {
   const [leadsData, setLeadsData] = useState([]);
 
   const leadData = () => {
-    fetch("https://hackathonmodule-2.herokuapp.com/lead", {
+    fetch("http://localhost:9000/lead", {
       method: "GET",
     })
       .then((data) => data.json())
@@ -39,7 +39,7 @@ function AddUser({ leadData }) {
   const [show, setShow] = useState(false);
 
   let AddLeadFn = (newLead) => {
-    fetch("https://hackathonmodule-2.herokuapp.com/lead", {
+    fetch("http://localhost:9000/lead", {
       method: "POST",
       body: JSON.stringify([newLead]),
       headers: { "Content-Type": "application/json" },
