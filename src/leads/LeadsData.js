@@ -13,7 +13,7 @@ export function LeadsData() {
   const [leadsData, setLeadsData] = useState([]);
 
   const leadData = () => {
-    fetch("https://hackathonmodule-2.herokuapp.com/lead", {
+    fetch("http://localhost:9000/lead", {
       method: "GET",
     })
       .then((data) => data.json())
@@ -37,9 +37,10 @@ export function LeadsData() {
 function AddUser({ leadData }) {
   // TO HIDE INPUT FIELD
   const [show, setShow] = useState(false);
+  const [hideAdd, setHideAdd] = useState(true);
 
   let AddLeadFn = (newLead) => {
-    fetch("https://hackathonmodule-2.herokuapp.com/lead", {
+    fetch("http://localhost:9000/lead", {
       method: "POST",
       body: JSON.stringify([newLead]),
       headers: { "Content-Type": "application/json" },
@@ -50,7 +51,8 @@ function AddUser({ leadData }) {
       values.email = "";
       values.title = "";
       values.leadSource = "";
-      values.picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1h6DPxI_QiEVN9xNst-Z8hn1Yq-eF6ydo-g&usqp=CAU";
+      values.picture =
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1h6DPxI_QiEVN9xNst-Z8hn1Yq-eF6ydo-g&usqp=CAU";
       setShow(false);
       leadData();
     });
@@ -96,6 +98,7 @@ function AddUser({ leadData }) {
     <OutsideClickHandler
       onOutsideClick={() => {
         setShow(false);
+        setHideAdd(true);
       }}
     >
       <section className="AuContainer">
@@ -188,7 +191,12 @@ function AddUser({ leadData }) {
               error={errors.picture && touched.picture}
             />
             <span className="auHide">
-              <VisibilityOffIcon onClick={() => setShow(false)} />
+              <VisibilityOffIcon
+                onClick={() => {
+                  setShow(false);
+                  setHideAdd(true);
+                }}
+              />
             </span>
             <Button variant="contained" color="success" type="submit">
               SUBMIT
@@ -197,13 +205,20 @@ function AddUser({ leadData }) {
         ) : (
           ""
         )}
-        <Button
-          onClick={() => setShow(true)}
-          variant="contained"
-          color="success"
-        >
-          ADD USER
-        </Button>
+        {hideAdd ? (
+          <Button
+            onClick={() => {
+              setShow(true);
+              setHideAdd(false);
+            }}
+            variant="contained"
+            color="success"
+          >
+            ADD USER
+          </Button>
+        ) : (
+          ""
+        )}
       </section>
     </OutsideClickHandler>
   );

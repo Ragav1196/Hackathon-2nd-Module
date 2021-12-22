@@ -114,6 +114,7 @@
 @media (max-height: 639.3px) {
   .sidebarContainer {
     overflow: scroll;
+    width: 60px;
   }
 }
 
@@ -227,7 +228,7 @@
   margin-left: 64px;
   overflow-x: scroll;
   overflow-y: scroll;
-  height: 88.8vh;
+  height: 90.8vh;
 }
 
 /* .leadsData {
@@ -312,25 +313,44 @@
   cursor: pointer;
 }
 
+@media (max-width: 650px) {
+  .leadsContainer {
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+
+  .leadsData {
+    overflow-x: scroll;
+    overflow-y: scroll;
+  }
+
+  .AuForm {
+    width: 79vw;
+  }
+}
+
 /* EDIT-LEAD */
 .ElContainer {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  margin-left: 43px;
-  height: 84vh;
+  margin-left: 50px;
+  height: 91vh;
+  overflow: scroll;
 }
 
 .ElContainer > p {
   font-weight: 700;
   font-size: 27px;
   margin: 0px;
+  margin: 10px;
+  margin-top: 20px;
 }
 
-.ElContainer > button {
-  width: 125px;
+.ElContainer button {
+  margin: 10px 0px;
+  width: 200px;
 }
 
 .ElForm {
@@ -338,14 +358,30 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  margin-bottom: 20px;
 }
 
 .ElForm > div {
   background-color: bisque;
 }
 
+.ElForm > div > .MuiInputBase-root {
+  height: 52px;
+}
+
 .ElHide {
   cursor: pointer;
+}
+
+.ElForm > article{
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (max-width: 650px) {
+  .ElForm {
+    width: 79vw;
+  }
 }
 
 /* CONTACTS */
@@ -561,7 +597,6 @@
 
 .RegRadioBtn > div {
   display: flex;
-  display: flex;
   justify-content: flex-start;
   gap: 81px;
 }
@@ -575,11 +610,51 @@
   .register > article {
     flex-direction: column;
     width: 238px;
-    height: 495px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: initial;
+    height: min-content;
   }
 
   .register {
-    margin: 20px 0px;
-    height: auto;
+    overflow: scroll;
+    height: 91vh;
+    align-items: initial;
+    margin-left: 64px;
+  }
+
+  .register > article > img {
+    width: 217px;
+    height: 147px;
+  }
+
+  .register > article > form > .input {
+    margin: 5px 30px;
+    width: 80%;
+  }
+
+  .RegRadioBtn > div {
+    /* margin: 0px 20px; */
+    display: flex;
+    gap: 0px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .RegRadioBtn > div:nth-child(3) {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .RegRadioBtn input,
+  .RegRadioBtn label {
+    margin-bottom: 5px;
+  }
+
+  .register > article button {
+    width: 70%;
+    margin: 10px 0px;
+    margin-left: 45px;
   }
 }

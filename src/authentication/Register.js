@@ -15,7 +15,7 @@ export function Register() {
   const history = useHistory();
 
   async function RegisterUser(userInfo) {
-    const response = await fetch("https://hackathonmodule-2.herokuapp.com/register", {
+    const response = await fetch("http://localhost:9000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
