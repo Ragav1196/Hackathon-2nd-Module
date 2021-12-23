@@ -130,7 +130,7 @@
   width: 0px;
   column-gap: 10px;
   justify-content: space-between;
-  opacity: 0;
+  /* opacity: 2; */
   transition: all 0.2s;
   overflow: hidden;
 }
@@ -149,7 +149,6 @@
 }
 
 .sidebarContainer:hover .sidebarContent article {
-  opacity: 1;
   width: 140px;
 }
 
@@ -373,7 +372,7 @@
   cursor: pointer;
 }
 
-.ElForm > article{
+.ElForm > article {
   display: flex;
   justify-content: space-around;
 }
@@ -466,7 +465,7 @@
 
 .login > article > form > .input {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   /* height: 0px; */
 }
 
@@ -523,7 +522,6 @@
 /*    REGISTER */
 .register {
   background-color: white;
-  padding: 0px 70px;
   height: 89vh;
   display: flex;
   align-items: center;
@@ -555,7 +553,7 @@
 
 .register > article > form > .input {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .input > label {
@@ -620,7 +618,7 @@
     overflow: scroll;
     height: 91vh;
     align-items: initial;
-    margin-left: 64px;
+    margin-left: 44px;
   }
 
   .register > article > img {
@@ -630,6 +628,7 @@
 
   .register > article > form > .input {
     margin: 5px 30px;
+    margin-bottom: 10px;
     width: 80%;
   }
 

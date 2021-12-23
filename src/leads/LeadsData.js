@@ -54,6 +54,7 @@ function AddUser({ leadData }) {
       values.picture =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1h6DPxI_QiEVN9xNst-Z8hn1Yq-eF6ydo-g&usqp=CAU";
       setShow(false);
+      setHideAdd(true);
       leadData();
     });
   };
